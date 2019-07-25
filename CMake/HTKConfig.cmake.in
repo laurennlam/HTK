@@ -1,0 +1,3 @@
+get_filename_component(HTK_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+include("${HTK_CMAKE_DIR}/HTKTargets.cmake")

@@ -1,3 +1,4 @@
+// vtk includes
 #include <vtkActor.h>
 #include <vtkNew.h>
 #include <vtkPolyDataMapper.h>
@@ -33,5 +34,5 @@ namespace htk
 
     renderWindow->Render();
     renderWindowInteractor->Start();
-  }
+  };
 }
