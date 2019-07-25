@@ -2,6 +2,7 @@ set(PROJECT_NAME HTKVTK)
 project(${PROJECT_NAME})
 
 find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
 
 set(SOURCE_FILES
   htkVTKUtils.cxx
