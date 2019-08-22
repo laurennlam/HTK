@@ -28,3 +28,10 @@ endif(HTK_USE_ITK)
 if(HTK_USE_OPENCV)
   add_subdirectory(OpenCV)
 endif(HTK_USE_OPENCV)
+
+configure_file(
+  ${CMAKE_SOURCE_DIR}/CMake/HTKConfig.cmake.in
+  "${CMAKE_BINARY_DIR}/HTKConfig.cmake" @ONLY)
+
+export(TARGETS HTKVTKLib HTKCommonLib
+  FILE "${CMAKE_BINARY_DIR}/HTKTargets.cmake")
