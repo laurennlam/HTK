@@ -1,3 +1,6 @@
+// htk includes
+#include "htkVTKUtils.h"
+
 // vtk includes
 #include <vtkActor.h>
 #include <vtkNew.h>
@@ -7,32 +10,33 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkSphereSource.h>
 
-
 namespace htk
 {
-  static void CreateSphereSource()
-  {
-    vtkNew<vtkSphereSource> sphereSource;
-    sphereSource->SetCenter(0.0, 0.0, 0.0);
-    sphereSource->SetRadius(5.0);
 
-    vtkNew<vtkPolyDataMapper> mapper;
-    mapper->SetInputConnection(sphereSource->GetOutputPort());
+void CreateSphereSource()
+{
+  vtkNew<vtkSphereSource> sphereSource;
+  sphereSource->SetCenter(0.0, 0.0, 0.0);
+  sphereSource->SetRadius(5.0);
 
-    vtkNew<vtkActor> actor;
-    actor->SetMapper(mapper.Get());
+  vtkNew<vtkPolyDataMapper> mapper;
+  mapper->SetInputConnection(sphereSource->GetOutputPort());
 
-    vtkNew<vtkRenderer> renderer;
-    renderer->AddActor(actor.Get());
-    renderer->SetBackground(.3, .6, .3);
+  vtkNew<vtkActor> actor;
+  actor->SetMapper(mapper.Get());
 
-    vtkNew<vtkRenderWindow> renderWindow;
-    renderWindow->AddRenderer(renderer.Get());
+  vtkNew<vtkRenderer> renderer;
+  renderer->AddActor(actor.Get());
+  renderer->SetBackground(.3, .6, .3);
 
-    vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
-    renderWindowInteractor->SetRenderWindow(renderWindow.Get());
+  vtkNew<vtkRenderWindow> renderWindow;
+  renderWindow->AddRenderer(renderer.Get());
 
-    renderWindow->Render();
-    renderWindowInteractor->Start();
-  };
+  vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
+  renderWindowInteractor->SetRenderWindow(renderWindow.Get());
+
+  renderWindow->Render();
+  renderWindowInteractor->Start();
+}
+
 }

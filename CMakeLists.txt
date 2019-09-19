@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 project(HTK)
 
+include(GenerateExportHeader)
+
 # HTK doesn't require C++ 14 and higher
 set(CMAKE_CXX_STANDARD 11)
 
 # TODO is it useful ?
 #add_subdirectory(CMake)
+
+option(BUILD_SHARED_LIBS "Build HTK as a shared library (vs. static library)." ON)
 
 # enable HTK modules
 option(HTK_USE_COMMON "Enable common C++ features" ON)
