@@ -3,6 +3,7 @@ project(${PROJECT_NAME})
 
 set(SOURCE_FILES
   htkMath.cxx
+  htkIO.cxx
 )
 
 add_library(${PROJECT_NAME}Lib ${SOURCE_FILES})
