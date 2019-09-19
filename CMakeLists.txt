@@ -17,25 +17,31 @@ option(HTK_USE_VTK "Enable VTK features" OFF)
 option(HTK_USE_ITK "Enable ITK features" OFF)
 option(HTK_USE_OPENCV "Enable OpenCV features" OFF)
 
+set(LibsList )
+
 if(HTK_USE_COMMON)
   add_subdirectory(Common)
+  list(APPEND LibsList HTKCommonLib)
 endif(HTK_USE_COMMON)
 
 if(HTK_USE_VTK)
   add_subdirectory(VTK)
+  list(APPEND LibsList HTKVTKLib)
 endif(HTK_USE_VTK)
 
 if(HTK_USE_ITK)
   add_subdirectory(ITK)
+  list(APPEND LibsList HTKITKLib)
 endif(HTK_USE_ITK)
 
 if(HTK_USE_OPENCV)
   add_subdirectory(OpenCV)
+  list(APPEND LibsList HTKOPENCVLib)
 endif(HTK_USE_OPENCV)
 
 configure_file(
   ${CMAKE_SOURCE_DIR}/CMake/HTKConfig.cmake.in
   "${CMAKE_BINARY_DIR}/HTKConfig.cmake" @ONLY)
 
-export(TARGETS HTKVTKLib HTKCommonLib
+export(TARGETS ${LibsList}
   FILE "${CMAKE_BINARY_DIR}/HTKTargets.cmake")
