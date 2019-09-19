@@ -17,7 +17,7 @@ namespace htk
 		 * @param appendContent If the file already exists, define if the content
 		 * is appended or erase the current content
 		 */
-		HTKCOMMONLIB_EXPORT void writeOutputFile(const std::string& filePath,
+		HTKCOMMONLIB_EXPORT void WriteOutputFile(const std::string& filePath,
 			const std::string& content,
 			const bool appendContent = false);
 	}

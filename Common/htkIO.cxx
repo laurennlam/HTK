@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-void htk::io::writeOutputFile(const std::string& filePath, const std::string& content,
+void htk::io::WriteOutputFile(const std::string& filePath, const std::string& content,
 	const bool appendContent)
 {
 	std::ofstream myfile;
