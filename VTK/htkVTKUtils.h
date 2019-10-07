@@ -9,12 +9,14 @@
 namespace htk
 {
 
-  // Open a VTK window ans display the dataObject inside.
-  //
-  // The attribute type determines if the color is based
-  // on a cell array or a point array. Possible values are:
-  // vtkDataObject::POINT
-  // vtkDataObject::CELL
+  /**
+  * Open a VTK window ans display the dataObject inside.
+  *
+  * @param dataObject VTK Object to be displayed
+  * @param attributeType Determines if the color is based on a cell array or
+  * a point array. Possible values are: vtkDataObject::POINT and
+  * vtkDataObject::CELL.
+  */
   HTKVTKLIB_EXPORT bool DisplayVtkDataObject(vtkDataObject* dataObject, int attributeType = vtkDataObject::POINT);
 
 }
