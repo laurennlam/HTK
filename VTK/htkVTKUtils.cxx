@@ -3,40 +3,56 @@
 
 // vtk includes
 #include <vtkActor.h>
+#include <vtkDataArray.h>
+#include <vtkDataSet.h>
+#include <vtkDataSetAttributes.h>
+#include <vtkDataSetMapper.h>
+#include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkNew.h>
-#include <vtkPolyDataMapper.h>
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkSphereSource.h>
 
 namespace htk
 {
 
-void CreateSphereSource()
-{
-  vtkNew<vtkSphereSource> sphereSource;
-  sphereSource->SetCenter(0.0, 0.0, 0.0);
-  sphereSource->SetRadius(5.0);
+  bool DisplayVtkDataObject(vtkDataObject* dataObject, int attributeType)
+  {
+    vtkDataSet* dataset = vtkDataSet::SafeDownCast(dataObject);
+    if (!dataset)
+    {
+      std::cerr << "This dataset type is not supported by DisplayVtkDataObject." << std::endl;
+      return false;
+    }
 
-  vtkNew<vtkPolyDataMapper> mapper;
-  mapper->SetInputConnection(sphereSource->GetOutputPort());
+    vtkNew<vtkDataSetMapper> mapper;
+    mapper->SetInputData(dataset);
 
-  vtkNew<vtkActor> actor;
-  actor->SetMapper(mapper.Get());
+    vtkDataSetAttributes* attributes = dataset->GetAttributes(attributeType);
+    if (attributes)
+    {
+      mapper->SetScalarRange(attributes->GetScalars()->GetRange());
+    }
 
-  vtkNew<vtkRenderer> renderer;
-  renderer->AddActor(actor.Get());
-  renderer->SetBackground(.3, .6, .3);
+    vtkNew<vtkActor> actor;
+    actor->SetMapper(mapper.Get());
 
-  vtkNew<vtkRenderWindow> renderWindow;
-  renderWindow->AddRenderer(renderer.Get());
+    vtkNew<vtkRenderer> renderer;
+    renderer->AddActor(actor.Get());
 
-  vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
-  renderWindowInteractor->SetRenderWindow(renderWindow.Get());
+    vtkNew<vtkRenderWindow> renderWindow;
+    renderWindow->AddRenderer(renderer.Get());
 
-  renderWindow->Render();
-  renderWindowInteractor->Start();
-}
+    vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
+    renderWindowInteractor->SetRenderWindow(renderWindow.Get());
+
+    vtkNew<vtkInteractorStyleTrackballCamera> interactorStyle;
+    renderWindowInteractor->SetInteractorStyle(interactorStyle.Get());
+
+    renderWindow->Render();
+    renderWindowInteractor->Start();
+
+    return true;
+  }
 
 }

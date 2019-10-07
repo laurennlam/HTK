@@ -4,18 +4,18 @@
 #include "htkvtklib_export.h"
 
 // vtk includes
-#include <vtkActor.h>
-#include <vtkNew.h>
-#include <vtkPolyDataMapper.h>
-#include <vtkRenderer.h>
-#include <vtkRenderWindow.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkSphereSource.h>
+#include <vtkDataObject.h>
 
 namespace htk
 {
 
-HTKVTKLIB_EXPORT void CreateSphereSource();
+  // Open a VTK window ans display the dataObject inside.
+  //
+  // The attribute type determines if the color is based
+  // on a cell array or a point array. Possible values are:
+  // vtkDataObject::POINT
+  // vtkDataObject::CELL
+  HTKVTKLIB_EXPORT bool DisplayVtkDataObject(vtkDataObject* dataObject, int attributeType = vtkDataObject::POINT);
 
 }
 
