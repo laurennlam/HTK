@@ -16,6 +16,7 @@ namespace htk
   * @param attributeType Determines if the color is based on a cell array or
   * a point array. Possible values are: vtkDataObject::POINT and
   * vtkDataObject::CELL.
+  * @ return True if the data object could be displayed, false otherwise
   */
   HTKVTKLIB_EXPORT bool DisplayVtkDataObject(vtkDataObject* dataObject, int attributeType = vtkDataObject::POINT);
 
