@@ -5,6 +5,18 @@
 
 // vtk includes
 #include <vtkDataObject.h>
+#include "vtkSmartPointer.h"
+
+class vtkImageData;
+class vtkRenderWindow;
+
+#include <vtkActor.h>
+#include <vtkNew.h>
+#include <vtkPolyDataMapper.h>
+#include <vtkRenderer.h>
+#include <vtkRenderWindow.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkSphereSource.h>
 
 namespace htk
 {
@@ -19,6 +31,8 @@ namespace htk
   * @ return True if the data object could be displayed, false otherwise
   */
   HTKVTKLIB_EXPORT bool DisplayVtkDataObject(vtkDataObject* dataObject, int attributeType = vtkDataObject::POINT);
+  HTKVTKLIB_EXPORT void CreateSphereSource();
+  HTKVTKLIB_EXPORT vtkSmartPointer<vtkImageData> TakeScreenshot(vtkRenderWindow* rw, int scale = 1);
 
 }
 

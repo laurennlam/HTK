@@ -12,10 +12,11 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
+#include <vtkSmartPointer.h>
+#include <vtkWindowToImageFilter.h>
 
 namespace htk
 {
-
   bool DisplayVtkDataObject(vtkDataObject* dataObject, int attributeType)
   {
     vtkDataSet* dataset = vtkDataSet::SafeDownCast(dataObject);
@@ -53,6 +54,33 @@ namespace htk
     renderWindowInteractor->Start();
 
     return true;
+  }
+
+  /*
+  * Create a screenshot for the current render window with the same size as the
+  * render window
+  * @param rw Render window in which the screenshot will be taken
+  * @param scale Scale factor which define the output image size (default is 1 means that the screenshot
+  * will have the same size as the render window.) If the renderwindow size (or renderwindow size * factor)
+  * is higher than the screen resolution, then the screenshot size will be clamped to the screen size
+  * @return Screenshot as a vtkImageData
+  */
+  vtkSmartPointer<vtkImageData> TakeScreenshot(vtkRenderWindow* rw, int scale)
+  {
+    if (!rw)
+    {
+      std::cerr << "No renderwindow has been set" << std::endl;
+      return nullptr;
+    }
+
+    vtkSmartPointer<vtkWindowToImageFilter> windowToImageFilter =
+      vtkSmartPointer<vtkWindowToImageFilter>::New();
+    windowToImageFilter->SetInput(rw);
+    windowToImageFilter->SetScale(scale);
+    windowToImageFilter->Update();
+
+    vtkSmartPointer<vtkImageData> output = windowToImageFilter->GetOutput();
+    return output;
   }
 
 }
