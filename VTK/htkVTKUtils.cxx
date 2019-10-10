@@ -12,10 +12,11 @@
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
+#include <vtkSmartPointer.h>
+#include <vtkWindowToImageFilter.h>
 
 namespace htk
 {
-
   bool DisplayVtkDataObject(vtkDataObject* dataObject, int attributeType)
   {
     vtkDataSet* dataset = vtkDataSet::SafeDownCast(dataObject);
@@ -53,6 +54,25 @@ namespace htk
     renderWindowInteractor->Start();
 
     return true;
+  }
+
+
+  vtkSmartPointer<vtkImageData> TakeScreenshot(vtkRenderWindow* rw, int scale)
+  {
+    if (!rw)
+    {
+      std::cerr << "No renderwindow has been set" << std::endl;
+      return nullptr;
+    }
+
+    vtkSmartPointer<vtkWindowToImageFilter> windowToImageFilter =
+      vtkSmartPointer<vtkWindowToImageFilter>::New();
+    windowToImageFilter->SetInput(rw);
+    windowToImageFilter->SetScale(scale);
+    windowToImageFilter->Update();
+
+    vtkSmartPointer<vtkImageData> output = windowToImageFilter->GetOutput();
+    return output;
   }
 
 }
