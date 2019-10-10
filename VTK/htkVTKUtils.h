@@ -10,13 +10,6 @@
 class vtkImageData;
 class vtkRenderWindow;
 
-#include <vtkActor.h>
-#include <vtkNew.h>
-#include <vtkPolyDataMapper.h>
-#include <vtkRenderer.h>
-#include <vtkRenderWindow.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkSphereSource.h>
 
 namespace htk
 {
