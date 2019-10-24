@@ -1,9 +1,9 @@
-#include "htkIO.h"
+#include "htkWriteOutputFile.h"
 
 #include <iostream>
 #include <fstream>
 
-void htk::io::WriteOutputFile(const std::string& filePath, const std::string& content,
+void htk::common::io::WriteOutputFile(const std::string& filePath, const std::string& content,
   const bool appendContent)
 {
   std::ofstream myfile;
