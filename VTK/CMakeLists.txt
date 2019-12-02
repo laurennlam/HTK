@@ -14,6 +14,7 @@ set(INCLUDE_DIRS
 set(SOURCE_FILES
   IO/htkReadImage.cxx
   Visu/htkDisplayVtkDataObject.cxx
+  Visu/htkResliceViewerToSuperimposedVTI.cxx
   Visu/htkTakeScreenshot.cxx
 )
 
