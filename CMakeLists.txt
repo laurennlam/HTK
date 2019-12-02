@@ -45,3 +45,6 @@ configure_file(
 
 export(TARGETS ${LibsList}
   FILE "${CMAKE_BINARY_DIR}/HTKTargets.cmake")
+
+enable_testing()
+add_subdirectory(Tests)
