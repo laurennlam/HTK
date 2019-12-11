@@ -29,3 +29,8 @@ Contributing
 ============
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions to contribute.
+
+License
+===========
+
+See [LICENSE](LICENSE) for the license copyrights
